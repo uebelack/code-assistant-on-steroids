@@ -1,0 +1,12 @@
+# pnpm settings for this deck. Keep this file even though the deck is not a
+# workspace: pnpm 11 no longer reads the `pnpm` field in package.json, so
+# `overrides` only takes effect from here.
+#
+# markdown-it 15 dropped the ./lib/* subpath exports, but @comark/markdown-it
+# (a @slidev/cli dependency) still imports ./lib/token.mjs and declares
+# markdown-it ^14. The other markdown-it consumers in the tree have loose peer
+# ranges, so without this pin pnpm resolves 15 for all of them and `slidev`
+# dies at startup with ERR_PACKAGE_PATH_NOT_EXPORTED. Drop the pin once
+# @comark/markdown-it supports 15.
+overrides:
+  markdown-it: ^14.3.2
